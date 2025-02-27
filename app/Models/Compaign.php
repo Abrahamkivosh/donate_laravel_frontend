@@ -15,6 +15,6 @@ class Compaign extends Model
         'target_amount',
         'start_date',
         'end_date',
-        'status',
+        'status', // true or false
     ];
 }

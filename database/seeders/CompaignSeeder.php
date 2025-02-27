@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Compaign;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class CompaignSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Compaign::factory()->count(10)->create();
     }
 }

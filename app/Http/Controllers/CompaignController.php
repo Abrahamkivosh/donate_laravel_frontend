@@ -13,7 +13,8 @@ class CompaignController extends Controller
      */
     public function index()
     {
-        //
+        $compaigns = Compaign::all();
+        return view('admins.compaigns.index', compact('compaigns'));
     }
 
     /**
@@ -21,7 +22,7 @@ class CompaignController extends Controller
      */
     public function create()
     {
-        //
+        return view('admins.compaigns.create');
     }
 
     /**
@@ -29,7 +30,9 @@ class CompaignController extends Controller
      */
     public function store(StoreCompaignRequest $request)
     {
-        //
+        $data = $request->validated();
+        Compaign::create($data);
+        return redirect()->route('compaigns.index')->with('success', 'Compaign created successfully');
     }
 
     /**
@@ -61,6 +64,7 @@ class CompaignController extends Controller
      */
     public function destroy(Compaign $compaign)
     {
-        //
+        $compaign->delete();
+        return redirect()->route('compaigns.index')->with('success', 'Compaign deleted successfully');
     }
 }

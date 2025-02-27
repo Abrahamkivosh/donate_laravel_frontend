@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('target_amount', 8, 2);
             $table->date('start_date');
             $table->date('end_date');
-            $table->string('status')->default('active');
+            $table->boolean('status')->default(true);
 
             $table->timestamps();
         });

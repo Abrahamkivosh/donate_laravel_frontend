@@ -17,7 +17,12 @@ class CompaignFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'description' => $this->faker->sentence(),
+            'target_amount' => $this->faker->numberBetween(1000, 100000),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
+            'status' => $this->faker->boolean(),
         ];
     }
 }

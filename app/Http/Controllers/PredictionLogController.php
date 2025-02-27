@@ -13,7 +13,8 @@ class PredictionLogController extends Controller
      */
     public function index()
     {
-        //
+        $predictionLogs = PredictionLog::all();
+        return view('admins.prediction_logs.index', compact('predictionLogs'));
     }
 
     /**

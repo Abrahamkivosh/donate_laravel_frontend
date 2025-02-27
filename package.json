@@ -6,22 +6,32 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@headlessui/react": "^2.0.0",
-        "@inertiajs/react": "^2.0.0",
-        "@tailwindcss/forms": "^0.5.3",
         "@types/node": "^18.13.0",
-        "@types/react": "^18.0.28",
-        "@types/react-dom": "^18.0.10",
-        "@vitejs/plugin-react": "^4.2.0",
         "autoprefixer": "^10.4.12",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "tailwindcss": "^3.2.1",
         "typescript": "^5.0.2",
-        "vite": "^6.0"
+        "vite": "^6.0",
+
+         "@fullcalendar/core": "^6.1.15",
+        "@fullcalendar/daygrid": "^6.1.15",
+        "@fullcalendar/timegrid": "^6.1.15",
+        "@paystack/inline-js": "^2.22.1",
+        "@types/jqueryui": "^1.12.23",
+        "@types/lodash": "^4.17.13",
+        "@types/paystack__inline-js": "^1.0.0",
+        "datatables.net": "^2.1.4",
+        "datatables.net-dt": "^2.1.4",
+        "jquery": "^3.7.1",
+        "lodash": "^4.17.21",
+        "sweetalert2": "^11.12.4",
+        "ts-loader": "^9.5.1",
+
+        "@popperjs/core": "^2.11.6",
+        "@types/fullcalendar": "^3.8.0",
+        "@types/jquery": "^3.5.30"
+
     }
 }

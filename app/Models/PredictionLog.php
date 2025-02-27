@@ -16,4 +16,9 @@ class PredictionLog extends Model
         'prediction_confidence', // Model confidence score (%)
 
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

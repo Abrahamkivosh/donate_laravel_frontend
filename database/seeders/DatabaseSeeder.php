@@ -13,11 +13,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(1)->create();
+        if (User::where('email', 'admin@example.com')->doesntExist()) {
+            $this->createAdmin();
+        }
 
+        $this->call([
+            CompaignSeeder::class,
+        ]);
+    }
+
+    private function createAdmin(): void
+    {
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'email_verified_at' => now(),
+            'role' => 'admin',
+
         ]);
     }
 }
