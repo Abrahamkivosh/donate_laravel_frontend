@@ -11,9 +11,10 @@
                         <div
                             class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center rounded">
                             <h6 class="text-white text-capitalize ps-3">Our Donations Compaigns</h6>
-
-                            <a href="{{ route('compaigns.create') }}" class="btn btn-sm bg-gradient-primary ms-3">Add
-                                Compaign</a>
+                            @if (Auth::user()->isAdmin())
+                                <a href="{{ route('compaigns.create') }}" class="btn btn-sm bg-gradient-primary ms-3">Add
+                                    Compaign</a>
+                            @endif
 
                         </div>
                     </div>
@@ -71,21 +72,24 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{ route('compaigns.edit', $compaign) }}"
-                                                    class="text-secondary font-weight-bold text-xs" data-toggle="tooltip"
-                                                    data-original-title="Edit compaign">
-                                                    Edit
-                                                </a>
-                                                <form action="{{ route('compaigns.destroy', $compaign) }}" method="post"
-                                                    class="d-inline"
-                                                    onsubmit="return confirm('Are you sure you want to delete this compaign?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Delete compaign">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                @if (Auth::user()->isAdmin())
+                                                    <a href="{{ route('compaigns.edit', $compaign) }}"
+                                                        class="btn btn-warning text-secondary font-weight-bold text-xs"
+                                                        data-toggle="tooltip" data-original-title="Edit compaign">
+                                                        Edit
+                                                    </a>
+                                                    <form action="{{ route('compaigns.destroy', $compaign) }}"
+                                                        method="post" class="d-inline"
+                                                        onsubmit="return confirm('Are you sure you want to delete this compaign?')">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit"
+                                                            class="btn btn-danger text-secondary font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Delete compaign">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                @endif
 
                                             </td>
                                         </tr>

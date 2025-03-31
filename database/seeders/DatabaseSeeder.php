@@ -17,10 +17,6 @@ class DatabaseSeeder extends Seeder
         if (User::where('email', 'admin@example.com')->doesntExist()) {
             $this->createAdmin();
         }
-
-        $this->call([
-            CompaignSeeder::class,
-        ]);
     }
 
     private function createAdmin(): void

@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
+use App\Models\Compaign;
 use App\Models\Donation;
+use App\Services\DonationDataService;
+use Illuminate\Support\Facades\Auth;
 
 class DonationController extends Controller
 {
+    protected DonationDataService $donationDataService;
+
+    public function __construct(DonationDataService $donationDataService)
+    {
+        $this->donationDataService = $donationDataService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +32,11 @@ class DonationController extends Controller
      */
     public function create()
     {
-        //
+        $compaigns = Compaign::query()->where('status', 1)
+            ->where('end_date', '>=', now()->toDateString())
+
+            ->pluck('name', 'id');
+        return view('admins.donations.create', compact('compaigns'));
     }
 
     /**
@@ -30,7 +44,13 @@ class DonationController extends Controller
      */
     public function store(StoreDonationRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['user_id'] = Auth::id();
+        $data['donation_date'] = now();
+        $donation = Donation::create($data);
+        // Append the new donation to the CSV file
+        $this->donationDataService->appendToCsv($donation);
+        return redirect()->route('donations.index')->with('success', 'Donation created successfully');
     }
 
     /**

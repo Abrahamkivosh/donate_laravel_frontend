@@ -11,7 +11,7 @@ class StoreDonationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreDonationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'compaign_id' => 'required|exists:compaigns,id',
+            'amount' => 'required|numeric|min:1',
+            'payment_method' => 'required|string',
         ];
     }
 }

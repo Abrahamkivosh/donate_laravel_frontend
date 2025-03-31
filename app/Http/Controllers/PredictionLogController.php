@@ -4,10 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePredictionLogRequest;
 use App\Http\Requests\UpdatePredictionLogRequest;
+use App\Models\Donation;
 use App\Models\PredictionLog;
+use App\Models\User;
+use App\Services\DonationPredictionService;
+use Illuminate\Support\Facades\DB;
 
 class PredictionLogController extends Controller
 {
+    protected DonationPredictionService $donationPredictionService;
+
+    public function __construct(DonationPredictionService $donationPredictionService)
+    {
+        $this->donationPredictionService = $donationPredictionService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +40,25 @@ class PredictionLogController extends Controller
      */
     public function store(StorePredictionLogRequest $request)
     {
-        //
+        //Get all Users of the system and predict their next donation
+        DB::beginTransaction();
+        try {
+            $users = User::query()->lazyById();
+            foreach ($users as $user) {
+                $prediction = $this->donationPredictionService->predictFutureDonation($user->id);
+
+                PredictionLog::create([
+                    'user_id' => $user->id,
+                    'predicted_donation' => $prediction['predicted_donation'],
+                    'predicted_next_donation_date' => $prediction['next_donation_date'],
+                ]);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('predictions.index')->with('error', 'Failed to generate predictions: ' . $e->getMessage());
+        }
+        return redirect()->route('predictions.index')->with('success', 'Predictions generated successfully.');
     }
 
     /**

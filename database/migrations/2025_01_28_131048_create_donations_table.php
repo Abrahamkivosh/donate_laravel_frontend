@@ -17,7 +17,6 @@ return new class extends Migration
             $table->decimal('amount', 8, 2);
             $table->string('payment_method');
             $table->date('donation_date');
-            $table->boolean('recurring');
             $table->foreignId('compaign_id')->constrained('compaigns');
             $table->timestamps();
         });

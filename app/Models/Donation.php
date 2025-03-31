@@ -14,7 +14,6 @@ class Donation extends Model
         'amount',
         'payment_method',
         'donation_date',
-        'recurring',
         'compaign_id',
     ];
 

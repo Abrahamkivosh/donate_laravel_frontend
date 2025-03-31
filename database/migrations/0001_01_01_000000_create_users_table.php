@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('role')->default('donor');
             $table->string('password');
+            $table->boolean('is_recurring_donor')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

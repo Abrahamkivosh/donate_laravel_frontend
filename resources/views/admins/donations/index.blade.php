@@ -35,9 +35,7 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Donation Date</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Is Recurring</th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Compaign</th>
@@ -47,31 +45,29 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($donations as $donation)
-                                        <tr>
+                                        <tr class="text-dark">
                                             <td>
-                                                <div class="d-flex px-2 py-1">
 
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $donation->user->name }}</h6>
-
-                                                    </div>
-                                                </div>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
+                                                    {{ $donation->user->name }}</p>
 
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $donation->amount }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">{{ $donation->amount }}
+                                                </p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $donation->payment_method }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
+                                                    {{ $donation->payment_method }}</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $donation->donation_date }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
+                                                    {{ $donation->donation_date }}</p>
                                             </td>
+
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $donation->is_recurring }}</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">{{ $donation->compaign->name }}</p>
+                                                <p class="text-xs font-weight-bold mb-0 text-center">
+                                                    {{ $donation->compaign->name }}</p>
                                             </td>
 
 

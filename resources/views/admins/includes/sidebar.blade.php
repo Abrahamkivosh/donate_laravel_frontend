@@ -18,12 +18,14 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ route('users.index') }}">
-                    <i class="material-symbols-rounded opacity-5">people</i>
-                    <span class="nav-link-text ms-1">Donors</span>
-                </a>
-            </li>
+            @if (Auth::user()->isAdmin())
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('users.index') }}">
+                        <i class="material-symbols-rounded opacity-5">people</i>
+                        <span class="nav-link-text ms-1">Donors</span>
+                    </a>
+                </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link text-dark" href="{{ route('compaigns.index') }}">
                     <i class="material-symbols-rounded opacity-5">hub</i>
@@ -36,18 +38,16 @@
                     <span class="nav-link-text ms-1">Donations</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="{{ route('predictions.index') }}">
-                    <i class="material-symbols-rounded opacity-5">energy</i>
-                    <span class="nav-link-text ms-1">Predictions</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">
-                    <i class="material-symbols-rounded opacity-5">folder</i>
-                    <span class="nav-link-text ms-1">Reports & Exports</span>
-                </a>
-            </li>
+            @if (Auth::user()->isAdmin())
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('predictions.index') }}">
+                        <i class="material-symbols-rounded opacity-5">energy</i>
+                        <span class="nav-link-text ms-1">Predictions</span>
+                    </a>
+                </li>
+            @endif
+
+
             <li class="nav-item">
                 <a class="nav-link text-dark" href="#">
                     <i class="material-symbols-rounded opacity-5">settings</i>

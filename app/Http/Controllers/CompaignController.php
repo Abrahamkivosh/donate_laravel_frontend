@@ -13,7 +13,7 @@ class CompaignController extends Controller
      */
     public function index()
     {
-        $compaigns = Compaign::all();
+        $compaigns = Compaign::query()->latest()->get();
         return view('admins.compaigns.index', compact('compaigns'));
     }
 
@@ -48,7 +48,7 @@ class CompaignController extends Controller
      */
     public function edit(Compaign $compaign)
     {
-        //
+        return view('admins.compaigns.edit', compact('compaign'));
     }
 
     /**
@@ -56,7 +56,9 @@ class CompaignController extends Controller
      */
     public function update(UpdateCompaignRequest $request, Compaign $compaign)
     {
-        //
+        $data = $request->validated();
+        $compaign->update($data);
+        return redirect()->route('compaigns.index')->with('success', 'Compaign updated successfully');
     }
 
     /**

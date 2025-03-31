@@ -12,6 +12,13 @@
                             class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center rounded">
                             <h6 class="text-white text-capitalize ps-3">Prediction Logs </h6>
 
+                            <form action="{{ route('predictions.store') }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-sm bg-gradient-primary ms-3">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                                    Sync Predictions</button>
+                            </form>
+
 
 
                         </div>
@@ -30,12 +37,6 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Date
                                         </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Confidence</th>
-
-
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,15 +54,11 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $predictionLog->predicted_donation_amount ?? 0 }}</p>
+                                                    {{ $predictionLog->predicted_donation ?? 0 }}</p>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $donation->predicted_donation_date }}</p>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $donation->prediction_confidence }} %</p>
+                                                    {{ $predictionLog->predicted_next_donation_date }}</p>
                                             </td>
 
                                         </tr>

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('prediction_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->decimal('predicted_donation_amount')->default(0);
-            $table->timestamp('predicted_donation_date');
-            $table->float('prediction_confidence')->default(0);
-
-            $table->timestamps();
+            $table->unsignedBigInteger('user_id'); // Foreign key to the donor
+            $table->decimal('predicted_donation', 10, 2); // Predicted donation amount
+            $table->date('predicted_next_donation_date'); // Predicted next donation date
+            $table->timestamps(); // Created at and updated at timestamps
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

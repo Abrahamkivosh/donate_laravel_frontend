@@ -35,18 +35,12 @@
                 </div>
             </div>
             <div class="services1-active">
-                @foreach ([
-            ['img' => 'services-img1.jpg', 'title' => 'Protect Our Ecosystems', 'description' => 'Join us in preserving the environment for future generations. Support initiatives that protect forests, oceans, and wildlife. Your contribution makes a difference.', 'goal' => '$100,000', 'raised' => '$75,000'],
-            ['img' => 'services-img2.jpg', 'title' => 'Give a Child a Future', 'description' => 'Help children in need by providing education, healthcare, and basic needs. A brighter future starts with your support. Sponsor a child today.', 'goal' => '$50,000', 'raised' => '$30,000'],
-            ['img' => 'services-img3.jpg', 'title' => 'Support Senior Citizens', 'description' => 'Our elderly need care and companionship. Support programs that help senior citizens with healthcare, housing, and social services to live with dignity.', 'goal' => '$60,000', 'raised' => '$45,000'],
-            ['img' => 'services-img2.jpg', 'title' => 'Protect Our Ecosystems', 'description' => 'Join us in preserving the environment for future generations. Support initiatives that protect forests, oceans, and wildlife. Your contribution makes a difference.', 'goal' => '$100,000', 'raised' => '$75,000'],
-        ] as $service)
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                @foreach ($compaigns as $compaign)
+                    <a href="{{ route('donations.create') }}" class="col-lg-4 col-md-6 col-sm-6">
                         <div class="properties pb-30">
                             <div class="properties-card">
                                 <div class="properties-img">
-                                    <a href="#"><img
-                                            src="{{ asset('website/assets/img/gallery/' . $service['img']) }}" alt></a>
+                                    <img src="{{ asset('website/assets/img/gallery/services-img1.jpg') }}" alt>
 
                                     <div class="single-skill">
                                         <div class="bar-progress">
@@ -61,26 +55,31 @@
                                 </div>
                                 <div class="wrap-wrapper">
                                     <div class="properties-caption">
-                                        <h3><a href="#">{{ $service['title'] }}</a></h3>
-                                        <p>{{ $service['description'] }}</p>
+                                        <h3><a href="#">{{ $compaign->name }}</a></h3>
                                     </div>
-                                    <div class="properties-footer d-flex justify-content-between align-items-center">
-                                        <div class="class-day">
-                                            <a href="#" class="btn">Donate</a>
-                                        </div>
-                                        <div class="class-day">
-                                            <span class="color-font2">{{ $service['goal'] }}</span>
-                                            <p>Goal</p>
-                                        </div>
-                                        <div class="class-day">
-                                            <span class="color-font1">{{ $service['raised'] }}</span>
-                                            <p>Raised</p>
+
+                                    <div class="">
+
+                                        <div class="properties-footer d-flex justify-content-between align-items-center">
+                                            <div class="class-day">
+                                                <span class="color-font2">{{ $compaign->target_amount }}</span>
+                                                <p>Goal</p>
+                                            </div>
+                                            <div class="class-day">
+                                                <span class="color-font2">{{ $compaign->start_date }}</span>
+                                                <p>Start Date</p>
+                                            </div>
+                                            <div class="class-day">
+                                                <span class="color-font2">{{ $compaign->end_date }}</span>
+                                                <p>End Date</p>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
         </div>

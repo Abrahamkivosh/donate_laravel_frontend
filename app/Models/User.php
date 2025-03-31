@@ -25,6 +25,7 @@ class User extends Authenticatable
         'phone',
         'role', // donor, admin
         'password',
+        'is_recurring_donor', // boolean
     ];
 
     public  function isAdmin(): bool
