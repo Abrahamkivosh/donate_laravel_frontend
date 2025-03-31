@@ -9,31 +9,18 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    private function userDashboard(): View
+    /**
+     * Display a listing of the resource.
+     */
+    public function dashboard(Request $request): View
     {
-
-
-        return view('users.dashboard');
-    }
-    private function adminDashboard(): View
-    {
-
-
         return view('admins.dashboard');
     }
 
-    public function dashboard(Request $request): View
-    {
-        if ($request->user()->role === 'admin') {
-            # code...
-            return $this->adminDashboard();
-        } else {
-            # code...
-            return $this->userDashboard();
-        }
-    }
 
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $users = User::query()->withSum('donations', 'amount')->get();

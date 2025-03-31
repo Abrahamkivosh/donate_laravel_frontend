@@ -28,7 +28,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-    @includeWhen(auth()->user()->isAdmin(), 'admins.includes.sidebar')
+    @include('admins.includes.sidebar')
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
