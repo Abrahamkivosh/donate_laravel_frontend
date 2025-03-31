@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreDonationRequest;
 use App\Http\Requests\UpdateDonationRequest;
+use App\Http\services\MpesaGateWay;
 use App\Models\Compaign;
 use App\Models\Donation;
 use App\Services\DonationDataService;
@@ -42,11 +43,24 @@ class DonationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDonationRequest $request)
+    public function store(StoreDonationRequest $request, MpesaGateWay $mpesaGateWay)
     {
+        // Validate the request data
         $data = $request->validated();
         $data['user_id'] = Auth::id();
         $data['donation_date'] = now();
+
+        // check if payment_method is mpesa
+        if ($data['payment_method'] == 'mpesa') {
+            // Get the phone number and amount from the request
+            $phoneNumber = $request->input('phone_number');
+            $amount = $request->input('amount');
+            // Call the lipaNaMPesaOnlineAPI method to initiate the payment
+            $response = $mpesaGateWay->lipaNaMPesaOnlineAPI($phoneNumber, $amount);
+        }
+
+
+
         $donation = Donation::create($data);
         // Append the new donation to the CSV file
         $this->donationDataService->appendToCsv($donation);

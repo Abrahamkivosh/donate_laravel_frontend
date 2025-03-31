@@ -78,6 +78,17 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div
+                                        class="input-group input-group-outline my-3 @error('phone_number') has-danger @enderror">
+                                        <label class="form-label" for="phone_number">Phone Number</label>
+                                        <input type="text" name="phone_number" id="phone_number" class="form-control"
+                                            value="{{ old('phone_number') }}">
+                                        @error('phone_number')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                </div>
 
 
 

@@ -24,7 +24,8 @@ class StoreDonationRequest extends FormRequest
         return [
             'compaign_id' => 'required|exists:compaigns,id',
             'amount' => 'required|numeric|min:1',
-            'payment_method' => 'required|string',
+            'payment_method' => 'required|string|in:mpesa,card,cash',
+            'phone_number' => 'required_if:payment_method,mpesa|numeric|digits_between:9,15',
         ];
     }
 }
