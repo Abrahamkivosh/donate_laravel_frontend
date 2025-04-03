@@ -24,7 +24,7 @@
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div
                             class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center rounded">
-                            <h6 class="text-white text-capitalize ps-3">Humbly Donate To JKUAT Compaign</h6>
+                            <h6 class="text-white text-capitalize ps-3">Humbly Donate To Marhab Foundation Compaign</h6>
 
                             <a href="{{ route('donations.index') }}" class="btn btn-sm bg-gradient-primary ms-3">Back</a>
 

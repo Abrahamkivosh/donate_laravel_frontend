@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('predictions', PredictionLogController::class);
     Route::resource('users', DashboardController::class);
 
+
+
     //sync predictions logs
     // Route::get('predictions-sync', [PredictionLogController::class, 'syncPredictions'])->name('predictions.sync');
 });

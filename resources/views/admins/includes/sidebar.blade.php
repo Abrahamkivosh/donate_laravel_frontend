@@ -49,7 +49,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link text-dark" href="#">
+                <a class="nav-link text-dark" href="{{ route('users.show', auth()->user()) }}">
                     <i class="material-symbols-rounded opacity-5">settings</i>
                     <span class="nav-link-text ms-1">Settings</span>
                 </a>

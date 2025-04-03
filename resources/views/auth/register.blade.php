@@ -1,4 +1,3 @@
-{{-- resources/views/auth/register.blade.php --}}
 @extends('layouts.guest')
 
 @section('styles')
@@ -24,7 +23,7 @@
             transition: all 0.7s ease-out;
         }
 
-        .form-input {
+        .form-control {
             border-radius: 10px;
             padding: 12px;
             border: 1px solid #ddd;
@@ -34,7 +33,7 @@
             transition: all 0.3s ease;
         }
 
-        .form-input:focus {
+        .form-control:focus {
             border-color: #4CAF50;
             outline: none;
         }
@@ -83,61 +82,66 @@
 @endsection
 
 @section('content')
-    <div class="   d-flex justify-content-center align-items-center  bg-light">
-        <div class="login-container animate__animated animate__fadeIn animate__delay-1s">
-            <div class="text-center mb-5">
+    <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+        <div class="login-container animate__animated animate__fadeIn animate__delay-1s p-4 shadow rounded bg-white">
+            <div class="text-center mb-4">
                 <h2 class="text-2xl font-semibold">Create Your Account</h2>
-                <p class="text-mute mt-2">Sign up to join us and make a difference.</p>
+                <p class="text-muted mt-2">Sign up to join us and make a difference.</p>
             </div>
-            <div>
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-            </div>
+
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
 
             <!-- Registration Form -->
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <input type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus
-                        class="form-input form-control" placeholder="Full Name">
+                        class="form-control" placeholder="Full Name">
                     @error('name')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <input type="email" name="email" value="{{ old('email') }}" required autocomplete="email"
-                        class="form-input form-control" placeholder="Email Address">
+                        class="form-control" placeholder="Email Address">
                     @error('email')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="mb-4">
-                    <input type="password" name="password" required autocomplete="new-password"
-                        class="form-input form-control" placeholder="Password">
+                <div class="mb-3">
+                    <input type="password" name="password" required autocomplete="new-password" class="form-control"
+                        placeholder="Password">
                     @error('password')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="mb-4">
+                <div class="mb-3">
                     <input type="password" name="password_confirmation" required autocomplete="new-password"
-                        class="form-input form-control" placeholder="Confirm Password">
+                        class="form-control" placeholder="Confirm Password">
                 </div>
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                        <input type="checkbox" name="remember" id="remember">
-                        <label for="remember" class="text-muted small">Remember Me</label>
-                    </div>
+                <!-- Campaign Selection -->
+                <div class="mb-3">
+                    <label for="campaigns" class="form-label">Select Preferred Campaigns:</label>
+                    <select name="campaigns[]" id="campaigns" class="form-control" multiple>
+                        @foreach ($campaigns as $campaign)
+                            <option value="{{ $campaign->id }}">{{ $campaign->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('campaigns')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <button type="submit" class="btn-login btn">Register</button>
+                <button type="submit" class="btn btn-primary w-100 btn-login">Register</button>
             </form>
 
             <div class="text-center mt-4">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Compaign;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,12 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $campaigns = Compaign::where('status', true)
+            ->where('end_date', '>=', now())
+            ->get();
+        return view('auth.register', [
+            'campaigns' => $campaigns,
+        ]);
     }
 
     /**
@@ -34,6 +40,8 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'campaigns' => 'nullable|array',
+            'campaigns.*' => 'exists:' . Compaign::class . ',id',
         ]);
 
         $user = User::create([
@@ -41,6 +49,10 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        //attach the user to the campaigns
+        if ($request->has('campaigns')) {
+            $user->compaigns()->attach($request->campaigns);
+        }
 
         event(new Registered($user));
 

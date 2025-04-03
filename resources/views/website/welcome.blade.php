@@ -102,7 +102,7 @@
                         </div>
                         <div class="support-caption">
                             <p class="mb-10">
-                                JKUAT Red Cross is committed to supporting communities through food, medical aid,
+                                Marhab foundation is committed to supporting communities through food, medical aid,
                                 and essentials. Our smart donation platform uses technology to enhance donor
                                 engagement and maximize impact.
                             </p>
