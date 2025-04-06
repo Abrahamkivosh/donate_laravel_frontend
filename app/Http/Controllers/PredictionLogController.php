@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePredictionLogRequest;
 use App\Http\Requests\UpdatePredictionLogRequest;
-use App\Models\Donation;
 use App\Models\PredictionLog;
 use App\Models\User;
 use App\Services\DonationPredictionService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PredictionLogController extends Controller
 {
@@ -65,6 +65,7 @@ class PredictionLogController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error($e);
             return redirect()->route('predictions.index')->with('error', 'Failed to generate predictions: ' . $e->getMessage());
         }
         return redirect()->route('predictions.index')->with('success', 'Predictions generated successfully.');
