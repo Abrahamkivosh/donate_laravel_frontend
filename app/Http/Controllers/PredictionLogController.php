@@ -51,12 +51,16 @@ class PredictionLogController extends Controller
                     continue;
                 }
                 $prediction = $this->donationPredictionService->predictFutureDonation($user->id);
-
-                PredictionLog::create([
-                    'user_id' => $user->id,
-                    'predicted_donation' => $prediction['predicted_donation'],
-                    'predicted_next_donation_date' => $prediction['next_donation_date'],
-                ]);
+                //if the prediction is the same as the last prediction, skip saving 
+                $lstPrediction = PredictionLog::where('user_id', $user->id)->latest()->first();
+                if ($lstPrediction && $lstPrediction->predicted_donation == $prediction['predicted_donation'] && $lstPrediction->predicted_next_donation_date == $prediction['next_donation_date']) {
+                } else {
+                    PredictionLog::create([
+                        'user_id' => $user->id,
+                        'predicted_donation' => $prediction['predicted_donation'],
+                        'predicted_next_donation_date' => $prediction['next_donation_date'],
+                    ]);
+                }
             }
             DB::commit();
         } catch (\Exception $e) {
