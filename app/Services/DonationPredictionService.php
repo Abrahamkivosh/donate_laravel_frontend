@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class DonationPredictionService
 {
@@ -103,6 +104,7 @@ class DonationPredictionService
         // Example: Call the ML model via an API
         // Replace this with your actual ML model integration
         $mlApiUrl = Env::get('ML_API_URL') . '/api/predict/';
+        Log::info('ML API URL: ' . $mlApiUrl);
         // Call the ML model API
         $response = Http::post($mlApiUrl, $mlInputs);
         if ($response->successful()) {
