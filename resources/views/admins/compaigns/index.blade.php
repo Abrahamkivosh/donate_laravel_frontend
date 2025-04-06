@@ -12,6 +12,9 @@
                             class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3 d-flex justify-content-between align-items-center rounded">
                             <h6 class="text-white text-capitalize ps-3">Our Donations Compaigns</h6>
                             @if (Auth::user()->isAdmin())
+                                <a href="{{ route('compaigns.notify-users') }}" class="btn btn-sm bg-gradient-info ms-3">
+                                    Notify Users
+                                </a>
                                 <a href="{{ route('compaigns.create') }}" class="btn btn-sm bg-gradient-primary ms-3">Add
                                     Compaign</a>
                             @endif

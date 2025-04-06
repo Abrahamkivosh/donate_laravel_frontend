@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCompaignRequest;
 use App\Http\Requests\UpdateCompaignRequest;
 use App\Models\Compaign;
+use App\Notifications\InterestedCampaign;
 
 class CompaignController extends Controller
 {
@@ -68,5 +69,20 @@ class CompaignController extends Controller
     {
         $compaign->delete();
         return redirect()->route('compaigns.index')->with('success', 'Compaign deleted successfully');
+    }
+
+    /**
+     * Notify users about the campaign.
+     */
+    public function notifyUsers()
+    {
+        $compaigns = Compaign::query()->get();
+        foreach ($compaigns as $compaign) {
+            $users = $compaign->users;
+            foreach ($users as $user) {
+                $user->notify(new InterestedCampaign($compaign));
+            }
+        }
+        return redirect()->route('compaigns.index')->with('success', 'Users notified successfully');
     }
 }

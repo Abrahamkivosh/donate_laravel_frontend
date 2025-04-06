@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('styles')
+    <style>
+        textarea {
+            border: 1px solid #646668 !important;
+            border-radius: 0.375rem !important;
+            padding: 0.375rem 0.75rem !important;
+            height: 100px !important;
+            resize: none !important;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -91,10 +100,10 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div
-                                        class="form-group input-group input-group-outline my-3
+                                        class="form-group  my-3
                                     @error('description') has-danger @enderror">
                                         <label class="form-label" for="description">Description</label>
-                                        <textarea name="description" id="description" class="form-control" title="Description">{{ old('description') }}</textarea>
+                                        <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
                                         @error('description')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror

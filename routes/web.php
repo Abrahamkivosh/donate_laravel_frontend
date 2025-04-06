@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('predictions', PredictionLogController::class);
     Route::resource('users', DashboardController::class);
 
+    //compaigns.notify-users
+    Route::get('compaigns.notify-users', [CompaignController::class, 'notifyUsers'])->name('compaigns.notify-users');
 
 
     //sync predictions logs
