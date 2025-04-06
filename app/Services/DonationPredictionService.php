@@ -103,7 +103,7 @@ class DonationPredictionService
     {
         // Example: Call the ML model via an API
         // Replace this with your actual ML model integration
-        $mlApiUrl = Env::get('ML_API_URL') . '/api/predict/';
+        $mlApiUrl =  'http://localhost:8000/api/predict/';
         Log::info('ML API URL: ' . $mlApiUrl);
         // Call the ML model API
         $response = Http::post($mlApiUrl, $mlInputs);
