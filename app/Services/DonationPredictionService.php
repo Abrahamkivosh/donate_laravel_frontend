@@ -16,7 +16,7 @@ class DonationPredictionService
      * @param int $userId
      * @return array
      */
-    private function getMlInputs(int $userId)
+    public function getMlInputs(int $userId)
     {
         // Get the user
         $user = User::find($userId);

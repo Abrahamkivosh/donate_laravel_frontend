@@ -45,6 +45,11 @@ class PredictionLogController extends Controller
         try {
             $users = User::query()->lazyById();
             foreach ($users as $user) {
+                $inputs = $this->donationPredictionService->getMlInputs($user->id);
+                // if total_donations < 1, skip this user
+                if ($inputs['total_donations'] < 1) {
+                    continue;
+                }
                 $prediction = $this->donationPredictionService->predictFutureDonation($user->id);
 
                 PredictionLog::create([

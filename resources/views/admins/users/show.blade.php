@@ -68,7 +68,7 @@
                         <table class="table table-bordered donation-table">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Amount</th>
+                                    <th>Amount (KES)</th>
                                     <th>Payment Method</th>
                                     <th>Date</th>
                                     <th>Campaign</th>
@@ -77,10 +77,10 @@
                             <tbody>
                                 @foreach ($user->donations as $donation)
                                     <tr>
-                                        <td>${{ number_format($donation->amount, 2) }}</td>
+                                        <td>{{ number_format($donation->amount, 2) }}</td>
                                         <td>{{ ucfirst($donation->payment_method) }}</td>
                                         <td>{{ $donation->donation_date->format('M d, Y') }}</td>
-                                        <td>{{ $donation->campaign->name ?? 'N/A' }}</td>
+                                        <td>{{ $donation->compaign->name ?? 'N/A' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

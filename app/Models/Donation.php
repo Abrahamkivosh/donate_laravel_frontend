@@ -17,6 +17,10 @@ class Donation extends Model
         'compaign_id',
     ];
 
+    protected $casts = [
+        'donation_date' => 'datetime',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
